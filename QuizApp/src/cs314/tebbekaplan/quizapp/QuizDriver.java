@@ -18,6 +18,9 @@ public class QuizDriver extends Application {
 		questionBank = new ArrayList<QuizQuestion>(); 
 		questionList = new ArrayList<QuizQuestion>();
 		answers = new boolean[10];
+		for(int i=0; i<answers.length-1; i++) {
+			answers[i] = false;
+		}
 		
 		loadQuestionBank();
 		//selectQuestions();
@@ -29,6 +32,7 @@ public class QuizDriver extends Application {
 		questionList.add(q);
 	}
 
+	@SuppressWarnings("unused")
 	private void selectQuestions() {
 		questionList.clear(); // just in case
 		Random rng = new Random();
@@ -54,7 +58,7 @@ public class QuizDriver extends Application {
 	}
 	
 	public void recordAnswer(int questionNumber, boolean correct) {
-		if(questionNumber > 0 && questionNumber < answers.length) {
+		if(questionNumber > 0 && questionNumber <= answers.length) {
 			answers[questionNumber-1] = correct;
 		}
 		System.out.println("answer recorded");
@@ -66,7 +70,7 @@ public class QuizDriver extends Application {
 
 	public int getNumberCorrectAnswers() {
 		int correct = 0;
-		for(int i=0; i < answers.length; i++) {
+		for(int i=0; i < answers.length-1; i++) {
 			if(answers[i] == true) {
 				correct++;
 			}

@@ -12,5 +12,9 @@
     <string name="appname">CS314 QuizApp</string>
     <string name="authors">Caleb Tebbe &amp; Zach Kaplan</string>
     <string name="startQuiz">Start Quiz</string>
+    <string name="next">Next</string>
+    <string name="finish">Finish</string>
+    <string name="previous">Prev</string>
+    <string name="title_activity_results">ResultsActivity</string>
 
 </resources>

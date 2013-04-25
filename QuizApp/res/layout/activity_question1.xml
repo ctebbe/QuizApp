@@ -99,4 +99,30 @@
         android:ems="10"
         android:inputType="textMultiLine" />
 
+    <Button
+        android:id="@+id/previous"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/previous" />
+
+    <Button
+        android:id="@+id/finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/previous"
+        android:layout_alignBottom="@+id/previous"
+        android:layout_centerHorizontal="true"
+        android:text="@string/finish" />
+
+    <Button
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/finish"
+        android:layout_alignBottom="@+id/finish"
+        android:layout_alignParentRight="true"
+        android:text="@string/next" />
+
 </RelativeLayout>
