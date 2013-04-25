@@ -8,5 +8,9 @@
     <string name="b">B.</string>
     <string name="c">C.</string>
     <string name="d">D.</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="appname">CS314 QuizApp</string>
+    <string name="authors">Caleb Tebbe &amp; Zach Kaplan</string>
+    <string name="startQuiz">Start Quiz</string>
 
 </resources>

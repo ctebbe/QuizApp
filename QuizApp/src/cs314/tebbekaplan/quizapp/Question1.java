@@ -6,25 +6,26 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class Question1 extends Activity {
 	
 	Button btnA, btnB, btnC, btnD;
 	EditText ansA, ansB, ansC, ansD, questionText;
-	QuizQuestion question;
+	private QuizQuestion question;
+	private QuizDriver quizDriver;
+	private int questionNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question1);
         
-        QuizQuestion q = new QuizQuestion("here is a new question it might be long blah blah blah",
-        		"answer A text", "answer B text", "answer C text", "answer D text", 'c');
-        this.question = q;
+        questionNumber = 1;
+        quizDriver = (QuizDriver) getApplication();
+        this.question = quizDriver.getQuestion(1);
         
-        // assign buttons
+        // assign buttons/text fields
         btnA = (Button) findViewById(R.id.buttonA);
         btnB = (Button) findViewById(R.id.buttonB);
         btnC = (Button) findViewById(R.id.buttonC);
@@ -41,7 +42,7 @@ public class Question1 extends Activity {
         ansC.setText(question.getAnswerC());
         ansD.setText(question.getAnswerD());
         
-        // set the uneditable boxes
+        // set the un-editable boxes
         questionText.setKeyListener(null);
         ansA.setKeyListener(null);
         ansB.setKeyListener(null);
@@ -49,37 +50,7 @@ public class Question1 extends Activity {
         ansD.setKeyListener(null);
         
         // set up listeners for buttons
-        btnA.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				checkAnswer('a');
-				
-			}
-		});
-        
-        btnB.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				checkAnswer('b');
-				
-			}
-		});
-        
-        btnC.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				checkAnswer('c');
-				
-			}
-		});
-        
-        btnD.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				checkAnswer('d');
-				
-			}
-		});
+        initListeners();
         
         /*
 		// move to next question
@@ -92,15 +63,48 @@ public class Question1 extends Activity {
 
     }
     
-    // eventually make this record answer
-    private void checkAnswer(char answer) {
+    private void initListeners() {
+    	btnA.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				recordAnswer('a');
+			}
+		});
+        
+        btnB.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				recordAnswer('b');
+			}
+		});
+        
+        btnC.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				recordAnswer('c');
+			}
+		});
+        
+        btnD.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				recordAnswer('d');
+			}
+		});
+	}
+
+	// eventually make this record answer
+    private void recordAnswer(char answer) {
     	Toast msg;
 		if(question.isCorrect(answer)) {
+			quizDriver.recordAnswer(1, true);
 			msg = Toast.makeText(getBaseContext(), "Correct Answer! :)", Toast.LENGTH_LONG);
 		} else {
+			quizDriver.recordAnswer(1, false);
 			msg = Toast.makeText(getBaseContext(), "Incorrect Answer! :(", Toast.LENGTH_LONG);
 		}
 		msg.show();
+		//launchNextQuestion();
 	}
 
 
