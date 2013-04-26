@@ -15,7 +15,6 @@ public class Question1 extends Activity {
 	EditText ansA, ansB, ansC, ansD, questionText;
 	private QuizQuestion question;
 	private QuizDriver quizDriver;
-	@SuppressWarnings("unused")
 	private int questionNumber;
 
     @Override
@@ -25,7 +24,7 @@ public class Question1 extends Activity {
         
         questionNumber = 1;
         quizDriver = (QuizDriver) getApplication();
-        this.question = quizDriver.getQuestion(1);
+        this.question = quizDriver.getQuestion(questionNumber);
         
         // assign buttons/text fields
         btnA = (Button) findViewById(R.id.buttonA);
@@ -41,19 +40,12 @@ public class Question1 extends Activity {
         ansD = (EditText) findViewById(R.id.answerD);
         questionText = (EditText) findViewById(R.id.questionText);
         
-        /*
         questionText.setText(question.getQuestion());
         ansA.setText(question.getAnswerA());
         ansB.setText(question.getAnswerB());
         ansC.setText(question.getAnswerC());
         ansD.setText(question.getAnswerD());
-        */
-        questionText.setText("q text");
-        ansA.setText("ans");
-        ansB.setText("ans");
-        ansC.setText("ans");
-        ansD.setText("ans");
-        
+
         // set the un-editable boxes
         questionText.setKeyListener(null);
         ansA.setKeyListener(null);
@@ -63,44 +55,34 @@ public class Question1 extends Activity {
         
         // set up listeners for buttons
         initListeners();
-        
-        /*
-		// move to next question
-		Intent intent = new Intent(v.getContext(), SecondPage.class);
-		String value = text.getText().toString();
-		intent.putExtra("value", value);
-		startActivityForResult(intent, 0);
-		*/
-        		
-
     }
     
     private void initListeners() {
     	btnA.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				recordAnswer('a');
+				recordAnswer('a', v);
 			}
 		});
         
         btnB.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				recordAnswer('b');
+				recordAnswer('b', v);
 			}
 		});
         
         btnC.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				recordAnswer('c');
+				recordAnswer('c', v);
 			}
 		});
         
         btnD.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				recordAnswer('d');
+				recordAnswer('d', v);
 			}
 		});
         
@@ -137,24 +119,23 @@ public class Question1 extends Activity {
 	}
 
 	protected void gotoNextQuestion(View v) {
-		Intent intent = new Intent(v.getContext(), Question1.class);
+		Intent intent = new Intent(v.getContext(), Question2.class);
 		startActivityForResult(intent, 0);
 	}
 
 	// eventually make this record answer
-    private void recordAnswer(char answer) {
+    private void recordAnswer(char answer, View v) {
     	Toast msg;
 		if(question.isCorrect(answer)) {
-			//quizDriver.recordAnswer(1, true);
+			quizDriver.recordAnswer(questionNumber, true);
 			msg = Toast.makeText(getBaseContext(), "Correct Answer! :)", Toast.LENGTH_LONG);
 		} else {
-			//quizDriver.recordAnswer(1, false);
+			quizDriver.recordAnswer(questionNumber, false);
 			msg = Toast.makeText(getBaseContext(), "Incorrect Answer! :(", Toast.LENGTH_LONG);
 		}
 		msg.show();
-		//launchNextQuestion();
+		gotoNextQuestion(v);
 	}
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -162,5 +143,4 @@ public class Question1 extends Activity {
         getMenuInflater().inflate(R.menu.question1, menu);
         return true;
     }
-    
 }

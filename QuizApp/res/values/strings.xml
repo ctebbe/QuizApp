@@ -16,5 +16,6 @@
     <string name="finish">Finish</string>
     <string name="previous">Prev</string>
     <string name="title_activity_results">ResultsActivity</string>
+    <string name="title_activity_question2">Question2</string>
 
 </resources>

@@ -29,7 +29,10 @@ public class QuizDriver extends Application {
 	private void loadQuestionBank() {
 		QuizQuestion q = new QuizQuestion("here is a new question it might be long blah blah blah",
         		"answer A text", "answer B text", "answer C text", "answer D text", 'c');
+		QuizQuestion q2 = new QuizQuestion("here is a new question it might be long blah blah blah 2",
+        		"answer A text 2", "answer B text 2", "answer C text 2", "answer D text 2", 'b');
 		questionList.add(q);
+		questionList.add(q2);
 	}
 
 	@SuppressWarnings("unused")
@@ -51,7 +54,7 @@ public class QuizDriver extends Application {
 	
 	// returns the question from the questionList where the 'first question' is really at index 0
 	public QuizQuestion getQuestion(int questionNumber) {
-		if(questionNumber > 0 && questionNumber < questionList.size()) { // check for valid question number
+		if(questionNumber > 0 && questionNumber <= questionList.size()) { // check for valid question number
 			return questionList.get(questionNumber-1);
 		}
 		return null;
@@ -61,7 +64,6 @@ public class QuizDriver extends Application {
 		if(questionNumber > 0 && questionNumber <= answers.length) {
 			answers[questionNumber-1] = correct;
 		}
-		System.out.println("answer recorded");
 	}
 	
 	public String getResultsString() {
