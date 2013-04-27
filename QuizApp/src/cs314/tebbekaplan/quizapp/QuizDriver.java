@@ -1,9 +1,14 @@
 package cs314.tebbekaplan.quizapp;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
-
 import android.app.Application;
+import android.content.res.AssetManager;
+import android.util.Log;
 
 public class QuizDriver extends Application {
 	
@@ -22,13 +27,40 @@ public class QuizDriver extends Application {
 			answers[i] = false;
 		}
 		
-		loadQuestionBank();
+		// attempt to load all questions from file
+		loadQuestionBank("all_questions.txt");
+
+		
+		
 		//selectQuestions();
 	}
 	
-	private void loadQuestionBank() {
-		QuizQuestion q = new QuizQuestion("here is a new question it might be long blah blah blah",
-        		"answer A text", "answer B text", "answer C text", "answer D text", 'c');
+	@SuppressWarnings("unused")
+	private void loadQuestionBank(String file) {
+		        
+		String line = null;
+		/*// this is making the app crash...
+		AssetManager assetManager = getResources().getAssets();
+		InputStream inputStream = null;
+
+		try {
+		    inputStream = assetManager.open(file);
+		    if ( inputStream != null)
+		        Log.d("tag", "It worked!");
+		} catch (IOException e) {
+		        e.printStackTrace();
+		}*/
+    	
+		QuizQuestion q;
+		if(line != null) {
+			 q = new QuizQuestion(line,
+	        		"answer A text", "answer B text", "answer C text", "answer D text", 'c');
+		} else {
+			 q = new QuizQuestion("here is a new question it might be long blah blah blah",
+	        		"answer A text", "answer B text", "answer C text", "answer D text", 'c');
+		}
+		
+
 		QuizQuestion q2 = new QuizQuestion("here is a new question it might be long blah blah blah 2",
         		"answer A text 2", "answer B text 2", "answer C text 2", "answer D text 2", 'b');
 		questionList.add(q);
