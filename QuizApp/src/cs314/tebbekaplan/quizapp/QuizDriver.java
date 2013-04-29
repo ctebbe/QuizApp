@@ -2,13 +2,9 @@ package cs314.tebbekaplan.quizapp;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 import android.app.Application;
-import android.content.res.AssetManager;
-import android.util.Log;
 
 public class QuizDriver extends Application {
 	
@@ -27,48 +23,10 @@ public class QuizDriver extends Application {
 			answers[i] = false;
 		}
 		
-		// attempt to load all questions from file
-		loadQuestionBank("all_questions.txt");
-
-		
-		
 		//selectQuestions();
 	}
 	
-	@SuppressWarnings("unused")
-	private void loadQuestionBank(String file) {
-		        
-		String line = null;
-		/*// this is making the app crash...
-		AssetManager assetManager = getResources().getAssets();
-		InputStream inputStream = null;
-
-		try {
-		    inputStream = assetManager.open(file);
-		    if ( inputStream != null)
-		        Log.d("tag", "It worked!");
-		} catch (IOException e) {
-		        e.printStackTrace();
-		}*/
-    	
-		QuizQuestion q;
-		if(line != null) {
-			 q = new QuizQuestion(line,
-	        		"answer A text", "answer B text", "answer C text", "answer D text", 'c');
-		} else {
-			 q = new QuizQuestion("here is a new question it might be long blah blah blah",
-	        		"answer A text", "answer B text", "answer C text", "answer D text", 'c');
-		}
-		
-
-		QuizQuestion q2 = new QuizQuestion("here is a new question it might be long blah blah blah 2",
-        		"answer A text 2", "answer B text 2", "answer C text 2", "answer D text 2", 'b');
-		questionList.add(q);
-		questionList.add(q2);
-	}
-
-	@SuppressWarnings("unused")
-	private void selectQuestions() {
+	public void selectQuestions() {
 		questionList.clear(); // just in case
 		Random rng = new Random();
 		ArrayList<Integer> generated = new ArrayList<Integer>(); // keep track of the selected question number..no duplicates
@@ -92,6 +50,7 @@ public class QuizDriver extends Application {
 		return null;
 	}
 	
+	// records the answer for corresponding question
 	public void recordAnswer(int questionNumber, boolean correct) {
 		if(questionNumber > 0 && questionNumber <= answers.length) {
 			answers[questionNumber-1] = correct;
@@ -102,6 +61,7 @@ public class QuizDriver extends Application {
 		return "Your score is " + getNumberCorrectAnswers() + " out of 10.";
 	}
 
+	// return number of answers currently correct
 	public int getNumberCorrectAnswers() {
 		int correct = 0;
 		for(int i=0; i < answers.length-1; i++) {
@@ -111,4 +71,47 @@ public class QuizDriver extends Application {
 		}
 		return correct;
 	}
+
+	// parses data from a file already opened in the bufferedreader
+	public void parseQuestionData(BufferedReader br) throws IOException {
+		String record, element, question = null, a = null, b = null, c = null, d = null;
+		char correct;
+		while((record = br.readLine()) != null) {
+            element = getElement(record);
+            if (element == null) throw new IOException();
+            if (element.equals("Question")) {
+            	question = getStringValue(record);
+            } else if (element.equals("Answer A")) {
+            	a = getStringValue(record);
+            } else if (element.equals("Answer B")) {
+            	b = getStringValue(record);
+            } else if (element.equals("Answer C")) {
+            	c = getStringValue(record);
+            } else if (element.equals("Answer D")) {
+            	d = getStringValue(record);
+            } else if (element.equals("Correct Answer")) {
+            	correct = getCharValue(record);
+            	questionList.add(new QuizQuestion(question, a, b, c, d, correct)); // change to questionBank eventually
+            }
+		}
+	}
+
+	// get the tag
+	private String getElement(String record) {
+		try {
+            return (record.substring(record.indexOf("<") + 1, record.indexOf(">")));
+        } catch(Exception e) {
+            return null;
+        }
+	}
+	
+	// get the string value inside the tag
+	private String getStringValue(String record) {
+        return (record.substring(record.indexOf(">") + 1, record.indexOf("</"))).trim();
+    }
+	
+	// get the character value inside the tag
+	private Character getCharValue(String record) {
+        return record.charAt(record.indexOf(">") + 1);
+    }
 }

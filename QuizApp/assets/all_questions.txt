@@ -1,3 +1,12 @@
-questions text file
-vfz
-dzsfszdf
+<Question> question 1 blah blah blah here is a question with some text </Question>
+	<Answer A>answer for a...</Answer A>
+	<Answer B>answer for b...</Answer B>
+	<Answer C>answer for c...</Answer C>
+	<Answer D>answer for d...</Answer D>
+	<Correct Answer>c</Correct Answer>
+<Question> question 2 blah blah blah here is a question with some more text </Question>
+	<Answer A>answer for a...</Answer A>
+	<Answer B>answer for b...</Answer B>
+	<Answer C>answer for c...</Answer C>
+	<Answer D>answer for d...</Answer D>
+	<Correct Answer>b</Correct Answer>
