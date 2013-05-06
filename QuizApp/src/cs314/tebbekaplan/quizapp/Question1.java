@@ -109,7 +109,7 @@ public class Question1 extends Activity {
 	}
 
 	protected void gotoPreviousQuestion(View v) {
-		Intent intent = new Intent(v.getContext(), MainActivity.class);
+		Intent intent = new Intent(v.getContext(), Question10.class);
 		startActivityForResult(intent, 0);
 	}
 

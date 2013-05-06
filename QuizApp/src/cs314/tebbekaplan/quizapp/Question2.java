@@ -20,7 +20,7 @@ public class Question2 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_question1);
+        setContentView(R.layout.activity_question2);
         
         questionNumber = 2;
         quizDriver = (QuizDriver) getApplication();
@@ -119,7 +119,7 @@ public class Question2 extends Activity {
 	}
 
 	protected void gotoNextQuestion(View v) {
-		Intent intent = new Intent(v.getContext(), Question2.class);
+		Intent intent = new Intent(v.getContext(), Question3.class);
 		startActivityForResult(intent, 0);
 	}
 
