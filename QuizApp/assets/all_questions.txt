@@ -279,7 +279,7 @@
 	<Answer B>Lalitpur</Answer B>
 	<Answer C>Pokhara</Answer C>
 	<Answer D>Kathmandu</Answer D>
-	<Correct Answer>b</Correct Answer>
+	<Correct Answer>d</Correct Answer>
 <Question> What is the capital of Afghanistan? </Question>
 	<Answer A>Kandahar</Answer A>
 	<Answer B>Kabul</Answer B>

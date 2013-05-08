@@ -19,7 +19,7 @@ public class ResultsActivity extends Activity {
 		
 		txtResult = (EditText) findViewById(R.id.results);
 		txtResult.setKeyListener(null);
-		txtResult.setText(quizDriver.getResultsString() + "\n Thanks for playing!");
+		txtResult.setText(quizDriver.getResultsString() + "\n \n \n \n Thanks for playing!");
 	}
 
 	@Override

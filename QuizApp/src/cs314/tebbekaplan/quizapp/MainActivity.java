@@ -50,7 +50,7 @@ public class MainActivity extends Activity {
 			    if ( is != null) { // check the file opened correctly from assets folder
 			    	//Log.d("tag", "It worked!");
 			    	quizDriver.parseQuestionData(new BufferedReader(new InputStreamReader(is, "UTF-8")));
-			    	//quizDriver.selectQuestions();
+			    	quizDriver.selectQuestions();
 			    }
 			} catch (IOException e) {
 				Log.d("main activity", "IOException thrown");
